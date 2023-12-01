@@ -1,0 +1,13 @@
+{
+  "name": "line-drawing-component",
+  "version": "1.0.0",
+  "description": "A web component to easily animate SVG paths.",
+  "main": "index.js",
+  "scripts": {
+    "start": "npx browser-sync"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "browser-sync": "^2.29.3"
+  }
+}
