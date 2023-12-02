@@ -13,14 +13,11 @@ TODO:
   - Simultaneous
   - Sequential
   - Groups?
-- Handle other elements
-  - Polygons
-  - Rects
-  - Circles
-  - Others?
 - Fill options:
   - Leave
   - Remove
   - fade
   - scale
+- Option for duration based on length
 - Add looping option
+- Deploy

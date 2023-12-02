@@ -1,8 +1,20 @@
 class LineDrawing extends HTMLElement {
+  supportedElements = [
+    "path",
+    "circle",
+    "rect",
+    "line",
+    "polyline",
+    "polygon",
+    "ellipse",
+  ];
+
   connectedCallback() {
     this.addGlobalStyles();
 
-    const elements = [...document.querySelectorAll("path")];
+    const elements = [
+      ...document.querySelectorAll(this.supportedElements.join(", ")),
+    ];
 
     elements.forEach((element) => {
       element.style.setProperty("--line-length", element.getTotalLength());
@@ -22,7 +34,7 @@ class LineDrawing extends HTMLElement {
   --line-drawing-easing: ease-out;
 }
 
-line-drawing :where(path) {
+line-drawing :where(${this.supportedElements.join(", ")}) {
   animation: 
     line-drawing-stroke 
     var(--line-drawing-duration) 
