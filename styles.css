@@ -3,7 +3,14 @@ figure {
   place-items: center;
 }
 
+.hero svg,
 figure svg {
   max-width: 100%;
   max-height: 50dvh;
+}
+
+.hero {
+  display: grid;
+  place-items: center;
+  text-align: center;
 }

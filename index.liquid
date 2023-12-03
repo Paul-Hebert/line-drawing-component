@@ -21,12 +21,66 @@
   </head>
 
   <body>
-    <h1>&lt;line-drawing&gt;</h1>
+    <main>
+      <div class="hero">
+        <line-drawing> {% include './drawings/kaleido-paint' %} </line-drawing>
+        <h1>&lt;line-drawing&gt;</h1>
+      </div>
 
-    <figure>
-      <line-drawing> {% include './drawings/kaleido-paint' %} </line-drawing>
+      <p>
+        The <code>&lt;line-drawing&gt;</code> web component allows you to easily
+        apply
+        <a href="https://css-tricks.com/svg-line-animation-works/"
+          >SVG line animation</a
+        >
+        to shapes in an SVG.
+      </p>
 
-      <figcaption>An example of the line drawing component in use.</figcaption>
-    </figure>
+      <p>Using it requires a couple of steps:</p>
+
+      <ol>
+        <li>Load the script (I recommend as <code>type="module"</code>.)</li>
+        <li>
+          Wrap your <code>&lt;svg&gt;</code> element in a
+          <code>&lt;line-drawing&gt;</code> element.
+        </li>
+      </ol>
+
+      <p>Here's what this looks like:</p>
+
+      <pre><code>
+        <!-- TODO: Real unpkg script -->
+&lt;script src="path-to-script"&gt;&lt;/script&gt; 
+
+&lt;line-drawing&gt;
+  &lt;svg viewBox="0 0 100 100"&gt;
+     &lt;!-- Your SVG contents  --&gt;
+  &lt;/svg&gt;
+&lt;/line-drawing&gt;
+      </code></pre>
+
+      <!-- TODO: guide on doing text right -->
+      <p>
+        The web component can handle most SVG elements except for
+        <code>&lt;text&gt;</code>. If you want to animate text you'll need to
+        convert the text to <code>&lt;path&gt;</code> elements first.
+      </p>
+
+      <h2>Configuration Options</h2>
+
+      <!-- Overview Table -->
+
+      <h3>Triggering the Animation</h3>
+
+      <h3>Changing the Duration</h3>
+
+      <h3>Animating Lines One-By-One</h3>
+
+      <h3>Looping</h3>
+
+      <h3>Handling Elements Without Strokes</h3>
+
+      <h3>Handling Elements With Fills</h3>
+    </main>
   </body>
 </html>
