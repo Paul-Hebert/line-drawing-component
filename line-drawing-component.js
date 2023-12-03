@@ -10,14 +10,22 @@ class LineDrawing extends HTMLElement {
   ];
 
   connectedCallback() {
+    this.configureSettings();
+    this.addGlobalStyles();
+    this.addCustomProps();
+
+    this.classList.add("is-drawing");
+  }
+
+  configureSettings() {
     this.drawingMode = this.getAttribute("drawing-mode") || "simultaneous";
     this.duration = this.getAttribute("duration-ms") || 2000;
     this.staggeredRatio = this.getAttribute("staggered-ratio") || 1.1;
     this.minimumElementDuration =
       this.getAttribute("minimum-element-duration-ms") || 100;
+  }
 
-    this.addGlobalStyles();
-
+  addCustomProps() {
     // Grab all of the supported elements that have strokes
     const elements = [
       ...this.querySelectorAll(this.supportedElements.join(", ")),
@@ -84,7 +92,7 @@ class LineDrawing extends HTMLElement {
   --easing: ease-out;
 }
 
-line-drawing .stroked {
+line-drawing.is-drawing .stroked {
   animation: 
     line-drawing-stroke 
     var(--duration)
