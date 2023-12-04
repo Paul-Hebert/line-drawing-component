@@ -1,23 +1,23 @@
-# <line-drawing>
+# `<line-drawing>`
+
+The `<line-drawing>` web component can be used to turn an SVG illustration into
+an animated line drawing.
 
 TODO:
 
+- accessible names for all drawings
 - Document
 - Expose as npm package
-- Add trigger timing options:
-  - immediate
-  - in view
-  - manually triggered
-- Add prefers-reduced-motion support
-- Add line timing options
-  - Simultaneous
-  - Sequential
-  - Groups?
-- Fill options:
+- Deploy
+
+## Future Features
+
+- Add "staggered-group" drawing-mode
+- Add options to handle filled shapes options:
   - Leave
   - Remove
   - fade
   - scale
-- Option for duration based on length
+- Handling elements without strokes:
+  - Give em strokes or leave em alone
 - Add looping option
-- Deploy

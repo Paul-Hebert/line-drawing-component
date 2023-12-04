@@ -16,6 +16,7 @@
     />
 
     <script src="line-drawing-component.js" type="module"></script>
+    <script src="demos.js" defer></script>
 
     <link rel="stylesheet" href="styles.css" />
   </head>
@@ -23,18 +24,54 @@
   <body>
     <main>
       <div class="hero">
-        <line-drawing> {% include './drawings/kaleido-paint' %} </line-drawing>
+        <div class="demo-example">
+          <line-drawing>
+            {% include './drawings/kaleido-paint' %}
+          </line-drawing>
+          <button class="replay">Replay</button>
+        </div>
+
         <h1>&lt;line-drawing&gt;</h1>
       </div>
 
       <p>
-        The <code>&lt;line-drawing&gt;</code> web component allows you to easily
-        apply
-        <a href="https://css-tricks.com/svg-line-animation-works/"
-          >SVG line animation</a
-        >
-        to shapes in an SVG.
+        The <code>&lt;line-drawing&gt;</code> web component can be used to turn
+        an SVG illustration into an
+        <a href="https://css-tricks.com/svg-line-animation-works/">
+          animated line drawing.
+        </a>
       </p>
+
+      <h2>Try it out!</h2>
+
+      <p>
+        Use your mouse, finger, or stylus to draw on the canvas below. When
+        you're ready to animate your drawing click "Watch Animation."
+      </p>
+
+      <div class="demo">TODO!</div>
+
+      <p>
+        You can also upload an SVG file below to see it as a line drawing. This
+        works best with stroke-based illustrations and may not work well for
+        illustrations relying on lots of fills.
+      </p>
+
+      <div class="demo">
+        <label>
+          Upload File:
+          <input type="file" class="js-upload" accepts="image/svg+xml" />
+        </label>
+
+        <label>
+          <input type="checkbox" class="js-upload-drawing-mode" />
+          Draw shapes one-by-one
+        </label>
+
+        <div class="demo-example js-file-upload-wrapper" hidden></div>
+      </div>
+
+      <h2>Using the Component</h2>
 
       <p>Using it requires a couple of steps:</p>
 
@@ -46,41 +83,118 @@
         </li>
       </ol>
 
-      <p>Here's what this looks like:</p>
-
-      <pre><code>
-        <!-- TODO: Real unpkg script -->
-&lt;script src="path-to-script"&gt;&lt;/script&gt; 
+      <!-- TODO: Real unpkg script -->
+      <pre><code>&lt;script type="module" src="path-to-script"&gt;&lt;/script&gt; 
 
 &lt;line-drawing&gt;
   &lt;svg viewBox="0 0 100 100"&gt;
      &lt;!-- Your SVG contents  --&gt;
   &lt;/svg&gt;
-&lt;/line-drawing&gt;
-      </code></pre>
+&lt;/line-drawing&gt;</code></pre>
 
-      <!-- TODO: guide on doing text right -->
+      <h2>Configuration Options</h2>
+
+      <p>
+        There are a number of attributes that can be added to the
+        <code>&lt;line-drawing&gt;</code> element to customize its behavior.
+      </p>
+
+      <h3>Changing the Duration</h3>
+
+      <p>
+        You can add a <code>duration-ms</code> attribute to change the duration
+        of the animation (in milliseconds.) The default duration is 2000
+        milliseconds.
+      </p>
+
+      <pre><code>&lt;line-drawing duration-ms="5000"&gt;&lt;/line-drawing&gt;</code></pre>
+
+      <figure class="demo-example">
+        <line-drawing duration-ms="5000">
+          {% include './drawings/circuit' %}
+        </line-drawing>
+        <button class="replay">Replay</button>
+      </figure>
+
+      <h3>Drawing Mode</h3>
+
+      <p>
+        By default, all the shapes in your SVG will be drawn simultaneously. You
+        can change the <code>drawing-mode</code> attribute to
+        <code>series</code> to have the shapes be drawn one-by-one in the order
+        they're found in your SVG.
+      </p>
+
+      <p>
+        When using the <code>series</code> option, you can also add a
+        <code>series-ratio</code> attribute. This will control the timing
+        between shapes:
+      </p>
+
+      <ul>
+        <li>
+          If you set a value less than 1, then the next shape will start drawing
+          slightly before the current shape ends.
+        </li>
+        <li>
+          If you set a value above 1, then there will be a slight pause between
+          shapes.
+        </li>
+      </ul>
+
+      <pre><code>&lt;line-drawing drawing-mode="series" series-ratio="1.1"&gt;&lt;/line-drawing&gt;</code></pre>
+
+      <p>
+        This example uses a low <code>series-ratio</code> to overlap the
+        staggered strokes
+      </p>
+
+      <figure class="demo-example">
+        <line-drawing
+          duration-ms="15000"
+          drawing-mode="series"
+          series-ratio=".125"
+        >
+          {% include './drawings/flow-fields' %}
+        </line-drawing>
+        <button class="replay">Replay</button>
+      </figure>
+
+      <h3>Triggering the Animation</h3>
+
+      <h2>Accessibility and <code>prefers-reduced-motion</code></h2>
+
+      <h2>Animating Text</h2>
+
       <p>
         The web component can handle most SVG elements except for
         <code>&lt;text&gt;</code>. If you want to animate text you'll need to
         convert the text to <code>&lt;path&gt;</code> elements first.
       </p>
 
-      <h2>Configuration Options</h2>
+      <p>
+        However, this may still not give you the result you'd like. The text's
+        stroke outline will be animated instead of its fill. If you want the
+        text to appear handwritten you'll need to manually trace the text's
+        strokes and potentially use a clipping mask to constrain the strokes to
+        the exact shape of the text's characters.
+      </p>
 
-      <!-- Overview Table -->
+      <p>
+        Here's an example where I've traced strokes and used clipping masks to
+        animate some text for my wedding website:
+      </p>
 
-      <h3>Triggering the Animation</h3>
-
-      <h3>Changing the Duration</h3>
-
-      <h3>Animating Lines One-By-One</h3>
-
-      <h3>Looping</h3>
-
-      <h3>Handling Elements Without Strokes</h3>
-
-      <h3>Handling Elements With Fills</h3>
+      <figure class="demo-example">
+        <line-drawing
+          duration-ms="5000"
+          drawing-mode="series"
+          series-ratio="1.1"
+        >
+          {% include './drawings/lisa-and-paul' %}
+        </line-drawing>
+        <button class="replay">Replay</button>
+      </figure>
     </main>
   </body>
 </html>
